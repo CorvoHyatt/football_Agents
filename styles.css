@@ -1,0 +1,99 @@
+.campo {
+	background-image: url("https://static.vecteezy.com/system/resources/previews/001/265/829/non_2x/view-of-football-field-vector.jpg");
+	background-size: cover;
+	width: 1366px;
+	height: 900px;
+	float: left;
+	box-shadow: 10px 10px;
+	border: 2px solid;
+	border-color: black;
+	border-radius: 50px;
+  }
+
+.pausa {
+	width: 70px;
+	height: 36px;
+	line-height: 2.25rem;
+	float: right;
+	margin-right: 150px;
+	margin-top: 28px;
+	padding: G 10px 0 18px;
+	border-radius: 50px;
+	color: #eee;
+	font-family: Roboto, sans-serif;
+	font-size: 0.875rem;
+	font-weight: 510;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	border: 2px solid;
+	border-color: yellow;
+	cursor: pointer;
+}
+
+.pausa:hover,
+.pausa:focus {
+	box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+	-webkit-transform: translatey(-0.25em);
+	transform: translateY(-0.25em);
+	border-bottom: 5px solid;
+	border-color: yellow;
+}
+
+.start {
+	width: 70px;
+	height: 36px;
+	line-height: 2.25rem;
+	float: right;
+	margin-right: 150px;
+	margin-top: 100px;
+	padding: 0 5px 0 20px;
+	border-radius: 50px;
+	color: #eee;
+	font-family: Roboto, sans-sertf;
+	font-size: 0.875rem;
+	font-weight: 510;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	border: 2px solid;
+	border-color: yellow;
+	cursor:pointer;
+}
+.start:hover,
+.start:focus{
+	box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+	-webkit-transform: translateY(-0.25em);
+	transform:translateY(-0.25em);
+	border-bottom: 5px solid;
+	border-color: yellow;
+}
+.stop{
+	width: 70px;
+	height: 36px;
+	line-height: 2.25rem;
+	float: right;
+	margin-right: 150px;
+	margin-top: 20px;
+	padding: 0 5px 0 20px;
+	border-radius: 50px;
+	color: #eee;
+	font-family: Roboto, sans-serif;
+	font-size: 0.875rem;
+	font-weight: 510;
+	letter-spacing: 0.06em;
+	text-transform:uppercase;
+	border: 2px solid;
+	border-color: yellow;
+	cursor: pointer;
+}
+
+.stop:hover,
+.stop:focus{
+	box-shadow: 0 0.5em 0.5em -0.4 var(--hover);
+	-webkit-transform: translateY(-0.25em);
+	transform: translateY(-0.25em);
+	border-bottom: 5px solid;
+	border-color:yellow;
+}
+body{  
+	background: linear-gradient(to left,#00649e, #0089d8);
+}
