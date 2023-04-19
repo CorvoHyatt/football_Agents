@@ -6,11 +6,30 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Football Agents</title>
 	<link rel="stylesheet" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 	
 </head>
 <body>
-	<div style="display: float;">
-		<div class="campo"><div id="game"></div></div>
+	<div class="contenedor">
+		<div class="campo">
+			<div id="game">
+
+			</div>
+		</div>
+
+		<div class="scoreboard">
+			<div class="info">
+				<h1>Robocup (Tarea agentes)</h1>
+				<h2>Puntuación: 10</h2>
+			</div>
+			<div class="buttons">
+				<button class="boton">Pausa</button>
+				<button class="boton">Iniciar Juego</button>
+				<button class="boton">Parar</button>
+			</div>
+		</div>
 	</div>	
 	<canvas></canvas>
     <script src="main.js"> </script>
