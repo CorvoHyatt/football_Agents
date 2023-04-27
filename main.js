@@ -81,9 +81,38 @@ Crafty.load(assetsObjBall);
 //                         //Logica para cuando se mete un gol
 //                     }
 //                 });
+//! Cración del Balon
+let ball=Crafty
+    .e('2D, Canvas, ball_start,SpriteAnimation, Collision')
+    .attr({ x: (1366/2)-20, y: 430, w: 40, h: 40 })
+    .collision()
+    .checkHits('Collision')
+    .bind("HitOn", (hitData) => {
+        //desplazamientos
+        if ((hitData=this.hit('arriba'))) {
+            this.y_move=false;
+            this.y_tiro=false;
+        }
+        if ((hitData=this.hit('abajo'))) {
+            this.y_move=true;
+            this.y_tiro=false;
+        }
+        if ((hitData=this.hit('centro'))) {
+            this.y_tiro=true;
+        }
+        if ((hitData=this.hit('walker_start'))) {
+            this.x_move=true;
+        }
+        if ((hitData=this.hit('walker2_start'))) {
+            this.x_move=false;
+        }
+    });
+ball.reel("walking", 500, [
+    [0, 0]
+]);
+ball.animate("walking", -1);
 
 //! Creación de los jugadores
-
 let team_1=[]
 let team_2=[]
 
