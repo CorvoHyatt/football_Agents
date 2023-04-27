@@ -25,13 +25,13 @@
 				<h2>Puntuación: 10</h2>
 			</div>
 			<div class="buttons">
-				<button class="boton">Pausa</button>
-				<button class="boton">Iniciar Juego</button>
+				<button id="pausa" class="boton">Pausa</button>
+				<button class="boton" onClick="initPosition();Crafty.init();ball.attr({x:494, y:302, w:20,h:20});">Iniciar Juego</button>
 				<button class="boton">Parar</button>
 			</div>
 		</div>
 	</div>	
-	<canvas></canvas>
+	<script type="text/javascript" src="https://rawgit.com/craftyjs/Crafty/release/dist/crafty-min.js"></script>
     <script src="main.js"> </script>
 </body>
 </html>
