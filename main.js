@@ -4,7 +4,7 @@ changeBoton=() => {
     } else { document.getElementById('pausa').innerHTML='Pause'; }
 }
 //Inicialización del campo
-Crafty.init(1024, 640, document.getElementById('game'))
+Crafty.init(1366, 900, document.getElementById('game'))
 
 //Texto y Botones
 // Ubicación del Timer
@@ -88,42 +88,42 @@ let team_1=[]
 let team_2=[]
 
 // Equipo_1
-team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, centro").attr({ x: 48, y: 270, w: 50, h: 50 }).collision())
-team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, arriba").attr({ x: 200, y: 190, w: 50, h: 50 }).collision())
-team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, abajo").attr({ x: 200, y: 350, w: 50, h: 50 }).collision())
-team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, centro").attr({ x: 310, y: 270, w: 50, h: 50 }).collision())
-team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, arriba").attr({ x: 310, y: 90, w: 50, h: 50 }).collision())
-team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, abajo").attr({ x: 310, y: 450, w: 50, h: 50 }).collision())
-team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, centro").attr({ x: 400, y: 270, w: 50, h: 50 }).collision())
+team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, centro").attr({ x: 30, y: 400, w: 85, h: 85 }).collision())
+team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, arriba").attr({ x: 300, y: 300, w: 85, h: 85 }).collision())
+team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, abajo").attr({ x: 300, y: 500, w: 85, h: 85 }).collision())
+team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, centro").attr({ x: 570, y: 150, w: 85, h: 85 }).collision())
+team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, arriba").attr({ x: 570, y: 400, w: 85, h: 85 }).collision())
+team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, abajo").attr({ x: 570, y: 650, w: 85, h: 85 }).collision())
+team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, centro").attr({ x: 850, y: 400, w: 85, h: 85 }).collision())
 
 // Equipo_2
-team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 904, y: 270, w: 50, h: 50 }).collision())
-team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 750, y: 190, w: 50, h: 50 }).collision())
-team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 750, y: 350, w: 50, h: 50 }).collision())
-team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 645, y: 270, w: 50, h: 50 }).collision())
-team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 645, y: 90, w: 50, h: 50 }).collision())
-team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 645, y: 450, w: 50, h: 50 }).collision())
-team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 545, y: 270, w: 50, h: 50 }).collision())
+team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 1240, y: 400, w: 85, h: 85 }).collision())
+team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 970, y: 300, w: 85, h: 85 }).collision())
+team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 970, y: 500, w: 85, h: 85 }).collision())
+team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 720, y: 150, w: 85, h: 85 }).collision())
+team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 720, y: 400, w: 85, h: 85 }).collision())
+team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 720, y: 650, w: 85, h: 85 }).collision())
+team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, centro").attr({ x: 420, y: 400, w: 85, h: 85 }).collision())
 
 
 //Posicionamiento de los jugadores
 //Equipo 1
 var initPosition=() => {
-    team_1[0].attr({ x: 48, y: 270, w: 50, h: 50 })
-    team_1[1].attr({ x: 200, y: 190, w: 50, h: 50 })
-    team_1[2].attr({ x: 200, y: 350, w: 50, h: 50 })
-    team_1[3].attr({ x: 310, y: 270, w: 50, h: 50 })
-    team_1[4].attr({ x: 310, y: 90, w: 50, h: 50 })
-    team_1[5].attr({ x: 310, y: 450, w: 50, h: 50 })
-    team_1[6].attr({ x: 400, y: 270, w: 50, h: 50 })
+    team_1[0].attr({ x: 30, y: 400, w: 85, h: 85 })
+    team_1[1].attr({ x: 300, y: 300, w: 85, h: 85 })
+    team_1[2].attr({ x: 300, y: 500, w: 85, h: 85 })
+    team_1[3].attr({ x: 570, y: 150, w: 85, h: 85 })
+    team_1[4].attr({ x: 570, y: 400, w: 85, h: 85 })
+    team_1[5].attr({ x: 570, y: 650, w: 85, h: 85 })
+    team_1[6].attr({ x: 850, y: 400, w: 85, h: 85 })
 
     //Equipo 2
-    team_2[0].attr({ x: 940, y: 270, w: 50, h: 50 })
-    team_2[1].attr({ x: 750, y: 190, w: 50, h: 50 })
-    team_2[2].attr({ x: 750, y: 350, w: 50, h: 50 })
-    team_2[3].attr({ x: 645, y: 270, w: 50, h: 50 })
-    team_2[4].attr({ x: 645, y: 90, w: 50, h: 50 })
-    team_2[5].attr({ x: 645, y: 450, w: 50, h: 50 })
-    team_2[6].attr({ x: 545, y: 270, w: 50, h: 50 })
+    team_2[0].attr({ x: 1240, y: 400, w: 85, h: 85 })
+    team_2[1].attr({ x: 970, y: 300, w: 85, h: 85 })
+    team_2[2].attr({ x: 970, y: 500, w: 85, h: 85 })
+    team_2[3].attr({ x: 720, y: 150, w: 85, h: 85 })
+    team_2[4].attr({ x: 720, y: 400, w: 85, h: 85 })
+    team_2[5].attr({ x: 720, y: 650, w: 85, h: 85 })
+    team_2[6].attr({ x: 420, y: 400, w: 85, h: 85 })
 
 }
