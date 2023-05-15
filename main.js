@@ -260,44 +260,53 @@ ball.bind("UpdateFrame", function (eventData) {
 
 let y1;
 let x1;
-var direccionX =Math.floor(Math.random() * 8) - 1;
-var direccionY = Math.floor(Math.random() * 8) - 1;
+
 var direccionesX = [];
 var direccionesY = [];
 for(let i = 0; i < 7; i++) {
-    direccionesX[i] = Math.floor(Math.random() * 10) - 1;
-    direccionesY[i] = Math.floor(Math.random() * 10) - 1;
+    direccionesX[i] = Math.floor(Math.random() * 8) - 1;
+    direccionesY[i] = Math.floor(Math.random() * 8) - 1;
 }
 
 team_1[0].bind("UpdateFrame", function (eventData) {
-    if (this.x + direccionX < 20|| this.x + direccionX > 300 ) {
-        direccionX = -direccionX; // Cambia de dirección en el eje x
+    if (this.x + direccionesX[0] < 20|| this.x + direccionesX[0] > 300 ) {
+        direccionesX[0] = -direccionesX[0]; // Cambia de dirección en el eje x
       }
-      if (this.y + direccionY <200 || this.y + direccionY > 600) {
-        direccionY = -direccionY; // Cambia de dirección en el eje y
+      if (this.y + direccionesY[0] <200 || this.y + direccionesY[0] > 600) {
+        direccionesY[0] = -direccionesY[0]; // Cambia de dirección en el eje y
       }
-      this.x += direccionX;
-      this.y += direccionY;
+      this.x += direccionesX[0];
+      this.y += direccionesY[0];
 });
 team_1[1].bind("UpdateFrame", function (eventData) {
-    if (this.x + direccionesX[1] < 300|| this.x + direccionesX[1] > ancho -100) {
+    if (this.x + direccionesX[1] < 200|| this.x + direccionesX[1] > ancho - 90 ) {
         direccionesX[1] = -direccionesX[1]; // Cambia de dirección en el eje x
       }
-      if (this.y + direccionesY[1] <200 || this.y + direccionesY[1] > 600) {
-        direccionesY[1] = direccionesY[1]; // Cambia de dirección en el eje y
+      if (this.y + direccionesY[1] <0 || this.y + direccionesY[1] > alto - 90) {
+        direccionesY[1] = -direccionesY[1]; // Cambia de dirección en el eje y
       }
       this.x += direccionesX[1];
       this.y += direccionesY[1];
 });
-for(let i = 1; i < 7 ; i++) {
-    team_1[i].bind("UpdateFrame", function (eventData) {
-        if (this.x + direccionesX[i] < 300|| this.x + direccionesX[i] > ancho -100) {
-            direccionesX[i] = -direccionesX[i]; // Cambia de dirección en el eje x
-          }
-          if (this.y + direccionesY[i] <200 || this.y + direccionesY[i] > 600) {
-            direccionesY[i] = direccionesY[i]; // Cambia de dirección en el eje y
-          }
-          this.x += direccionesX[i];
-          this.y += direccionesY[i];
-    });
-}
+team_1[1].bind("UpdateFrame", function (eventData) {
+    if (this.x + direccionesX[0] < 200|| this.x + direccionesX[0] > ancho - 90 ) {
+        direccionesX[0] = -direccionesX[0]; // Cambia de dirección en el eje x
+      }
+      if (this.y + direccionesY[0] <0 || this.y + direccionesY[0] > alto - 90) {
+        direccionesY[0] = -direccionesY[0]; // Cambia de dirección en el eje y
+      }
+      this.x += direccionesX[0];
+      this.y += direccionesY[0];
+});
+// for(let i = 1; i < 7 ; i++) {
+//     team_1[i].bind("UpdateFrame", function (eventData) {
+//         if (this.x + direccionesX[i] < 300|| this.x + direccionesX[i] > ancho -100) {
+//             direccionesX[i] = -direccionesX[i]; // Cambia de dirección en el eje x
+//           }
+//           if (this.y + direccionesY[i] <0 || this.y + direccionesY[i] > 600) {
+//             direccionesY[i] = direccionesY[i]; // Cambia de dirección en el eje y
+//           }
+//           this.x += direccionesX[i];
+//           this.y += direccionesY[i];
+//     });
+// }
