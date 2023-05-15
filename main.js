@@ -3,89 +3,42 @@ changeBoton = () => {
         document.getElementById('pausa').innerHTML = 'Continuar';
     } else { document.getElementById('pausa').innerHTML = 'Pausa'; }
 }
+let go1 = 0;
+let go2 = 0;
+let time = 0;
+let ancho = 1366;
+let alto = 900;
 //Inicialización del campo
-Crafty.init(1366, 900, document.getElementById('game'));
+Crafty.init(ancho, alto, document.getElementById('game'));
 //!Timer
-// Obtén una referencia al elemento de texto del contador de tiempo
-var timer = Crafty("h1#timer");
-var tiempoPausado = false;
-// Variables para el contador de tiempo
-var tiempo = 0;
-var intervalo;
+var Tiempo = Crafty.e('2D, DOM, Text')
+    .attr({ x: 1000, y: 30, w: 300, h: 20 })
+    .text("00:00:00")
+    .textFont({ size: '40px' })
+    .textColor('black');
 
-// Función para formatear el tiempo en formato HH:MM:SS
-function formatearTiempo(tiempo) {
-    var horas = Math.floor(tiempo / 3600);
-    var minutos = Math.floor((tiempo % 3600) / 60);
-    var segundos = tiempo % 60;
-
-    // Asegurarse de tener dos dígitos para cada componente de tiempo
-    var tiempoFormateado =
-        ("0" + horas).slice(-2) +
-        ":" +
-        ("0" + minutos).slice(-2) +
-        ":" +
-        ("0" + segundos).slice(-2);
-
-    return tiempoFormateado;
-}
-
-// Función para iniciar el contador de tiempo
-function iniciarTiempo() {
-    intervalo = setInterval(function () {
-        tiempo++;
-        timer.text(formatearTiempo(tiempo));
-    }, 1000); // Actualizar cada segundo (1000 ms)
-}
-function pausarTiempo() {
-    clearInterval(intervalo);
-    tiempoPausado = true;
-}
-function reanudarTiempo() {
-    if (tiempoPausado) {
-        intervalo = setInterval(function () {
-            tiempo++;
-            timer.text(formatearTiempo(tiempo));
-        }, 1000); // Actualizar cada segundo (1000 ms)
-        tiempoPausado = false;
-    }
-}
-// Función para detener el contador de tiempo
-function detenerTiempo() {
-    clearInterval(intervalo);
-}
-
-// Evento click para el botón "Iniciar Juego"
-Crafty("button#iniciar-juego").bind("click", function () {
-    initPosition();
-    Crafty.init();
-    ball.attr({ x: (1366 / 2) - 20, y: 430, w: 40, h: 40 });
-    iniciarTiempo();
-  });
-  
-  Crafty("button#parar-juego").bind("click", function () {
-    time = 0;
-    initPosition();
-    Crafty.stop();
-    goles1 = 0;
-    goles2 = 0;
-    marcador.text('Equipo1: ' + goles1 + '  Equipo2: ' + goles2);
-    detenerTiempo();
-  });
-  
-  Crafty("button#pausa").bind("click", function () {
-    if (!tiempoPausado) {
-      pausarTiempo();
+Tiempo.bind("UpdateFrame", function (e) {
+    time += e.dt / 1000;
+    let minutos = parseInt((time / 60), 10);
+    if (minutos < 10) minutos = '0' + minutos;
+    let segundos = parseInt((time % 60), 10);
+    if (segundos < 10) segundos = '0' + segundos;
+    if (minutos == 10) {
+        Crafty.stop(); go1 = 0; go2 = 0; time = 0;
     } else {
-      reanudarTiempo();
+        this.text('Tiempo: ' + minutos + ':' + segundos);
     }
-  });
-  
-
+})
 // Ubicación del Marcador
+let marcador = Crafty.e("2D, DOM, Text")
+    .attr({ x: 500, y: 30, w: 500, h: 50 })
 
 // Formato Marcador de goles
+marcador.textFont({
+    size: '40px',
+}).textColor('black');
 
+marcador.text('Tilines: ' + go1 + ' vs Yolks: ' + go2);
 
 //Inicialización de los jugadores
 
@@ -138,6 +91,36 @@ let assetsObjBall = {
 Crafty.load(assetsObjBall);
 
 //! Cración de las Porterias
+let red1 = Crafty
+    .e("2D, Canvas, Color, Collision")
+    .attr({ x: 22, y: 320, w: 40, h: 270 })
+    .color('red')
+    .collision()
+    .checkHits("ball_start")
+    .bind("HitOn", function (hitData) {
+        if ((hitData = this.hit('ball_start'))) {
+            go2 += 1;
+            Crafty.stop();
+            initPosition();
+            setTimeout(function () { Crafty.init(); }, 1000);
+            marcador.text('Tilines: ' + go1 + ' vs Yolks: ' + go2);
+        }
+    });
+let red2 = Crafty
+    .e("2D, Canvas, Color, Collision")
+    .attr({ x: ancho - 60, y: 320, w: 40, h: 270 })
+    .color('red')
+    .collision()
+    .checkHits("ball_start")
+    .bind("HitOn", function (hitData) {
+        if ((hitData = this.hit('ball_start'))) {
+            go1 += 1;
+            Crafty.stop();
+            initPosition();
+            setTimeout(function () { Crafty.init(); }, 1000);
+            marcador.text('Tilines: ' + go1 + ' vs Yolks: ' + go2);
+        }
+    })
 
 //! Cración del Balon
 let ball = Crafty
@@ -175,7 +158,7 @@ let team_1 = []
 let team_2 = []
 
 // Equipo_1
-team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, centro").attr({ x: 30, y: 400, w: 85, h: 85 }).collision())
+team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, centro").attr({ x: 100, y: 400, w: 85, h: 85 }).collision())
 team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, arriba").attr({ x: 300, y: 300, w: 85, h: 85 }).collision())
 team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, abajo").attr({ x: 300, y: 500, w: 85, h: 85 }).collision())
 team_1.push(Crafty.e("2D, Canvas, walker_start, SpriteAnimation, Collision, centro").attr({ x: 570, y: 150, w: 85, h: 85 }).collision())
@@ -195,8 +178,8 @@ team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, cen
 
 //Posicionamiento de los jugadores
 //Equipo 1
- function initPosition () {
-    team_1[0].attr({ x: 30, y: 400, w: 85, h: 85 })
+function initPosition() {
+    team_1[0].attr({ x: 100, y: 400, w: 85, h: 85 })
     team_1[1].attr({ x: 300, y: 300, w: 85, h: 85 })
     team_1[2].attr({ x: 300, y: 500, w: 85, h: 85 })
     team_1[3].attr({ x: 570, y: 150, w: 85, h: 85 })
@@ -212,6 +195,8 @@ team_2.push(Crafty.e("2D, Canvas, walker2_start, SpriteAnimation, Collision, cen
     team_2[4].attr({ x: 720, y: 400, w: 85, h: 85 })
     team_2[5].attr({ x: 720, y: 650, w: 85, h: 85 })
     team_2[6].attr({ x: 420, y: 400, w: 85, h: 85 })
+    ball.attr({ x: (1366 / 2) - 20, y: 430, w: 40, h: 40 })
+
 
 }
 // Espacio de desplazamiento establedo para cada jugador
@@ -234,7 +219,7 @@ for (let i = 0; i < 7; i++) {
 let xball;
 let yball;
 ball.origin("center");
-ball.bind("UpdateFrame",function(eventData) {
+ball.bind("UpdateFrame", function (eventData) {
     if (this.x > 950 || !this.x_move) {
         xball = true;
         this.x_move = false;
@@ -244,11 +229,11 @@ ball.bind("UpdateFrame",function(eventData) {
         this.x_move = true;
     }
     if (xball) {
-        this.x = this.x - 222 * (eventData.dt / 1000);
+        this.x = this.x - 222 * (eventData.dt / 1000) * 0.8;
         this.rotation = this.rotation - 8;
     }
     else {
-        this.x = this.x + 222 * (eventData.dt / 1000);
+        this.x = this.x + 222 * (eventData.dt / 1000) * 0.8;
         this.rotation = this.rotation + 8;
     }
     if (this.y >= 595 || this.y_move) {
@@ -264,10 +249,10 @@ ball.bind("UpdateFrame",function(eventData) {
         velocidad = 22
     }
     if (yball) {
-        this.y = this.y - velocidad * (eventData.dt / 1000);
+        this.y = this.y - velocidad * (eventData.dt / 1000) * 0.8;
     }
     else {
-        this.y = this.y + velocidad * (eventData.dt / 1000);
+        this.y = this.y + velocidad * (eventData.dt / 1000) * 0.8;
     }
 });
 
@@ -275,28 +260,44 @@ ball.bind("UpdateFrame",function(eventData) {
 
 let y1;
 let x1;
-team_1[0].bind("UpdateFrame", (eventData) => {
-    if (this.x > 68) {
-        x1 = true;
-    }
-    if (this.x < 28) {
-        x1 = false;
-    }
-    if (x1)
-        this.x = this.x - 30 * (eventData.dt / 1000);
-    else
-        this.x = this.x + 30 * (eventData.dt / 1000);
+var direccionX =Math.floor(Math.random() * 8) - 1;
+var direccionY = Math.floor(Math.random() * 8) - 1;
+var direccionesX = [];
+var direccionesY = [];
+for(let i = 0; i < 7; i++) {
+    direccionesX[i] = Math.floor(Math.random() * 10) - 1;
+    direccionesY[i] = Math.floor(Math.random() * 10) - 1;
+}
 
-    if (this.y >= 350) {
-        y1 = true;
-    }
-    if (this.y <= 190) {
-        y1 = false;
-    }
-    if (y1) {
-        this.y = this.y - 68 * (eventData.dt / 1000);
-    }
-    else {
-        this.y = this.y + 73 * (eventData.dt / 1000);
-    }
+team_1[0].bind("UpdateFrame", function (eventData) {
+    if (this.x + direccionX < 20|| this.x + direccionX > 300 ) {
+        direccionX = -direccionX; // Cambia de dirección en el eje x
+      }
+      if (this.y + direccionY <200 || this.y + direccionY > 600) {
+        direccionY = -direccionY; // Cambia de dirección en el eje y
+      }
+      this.x += direccionX;
+      this.y += direccionY;
 });
+team_1[1].bind("UpdateFrame", function (eventData) {
+    if (this.x + direccionesX[1] < 300|| this.x + direccionesX[1] > ancho -100) {
+        direccionesX[1] = -direccionesX[1]; // Cambia de dirección en el eje x
+      }
+      if (this.y + direccionesY[1] <200 || this.y + direccionesY[1] > 600) {
+        direccionesY[1] = direccionesY[1]; // Cambia de dirección en el eje y
+      }
+      this.x += direccionesX[1];
+      this.y += direccionesY[1];
+});
+for(let i = 1; i < 7 ; i++) {
+    team_1[i].bind("UpdateFrame", function (eventData) {
+        if (this.x + direccionesX[i] < 300|| this.x + direccionesX[i] > ancho -100) {
+            direccionesX[i] = -direccionesX[i]; // Cambia de dirección en el eje x
+          }
+          if (this.y + direccionesY[i] <200 || this.y + direccionesY[i] > 600) {
+            direccionesY[i] = direccionesY[i]; // Cambia de dirección en el eje y
+          }
+          this.x += direccionesX[i];
+          this.y += direccionesY[i];
+    });
+}
